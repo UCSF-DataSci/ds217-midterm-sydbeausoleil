@@ -9,20 +9,21 @@
 # NOTE: The main pipeline runs Q4-Q7 notebooks in order
 
 LOG_FILE="reports/pipeline_log.txt"
-echo "Starting clinical trial data pipeline at $(date)" > $LOG_FILE
+NOTEBOOKS=("q4_exploration.ipynb" "q5_missing_data.ipynb" "q6_transformation.ipynb" "q7_aggregation.ipynb")
 
-NOTEBOOKS=("q4_exploration.ipynb" "q5_missing_data.ipynb" "q6_transformation.ipynb" "q7_grouping_analysis.ipynb")
+echo "Starting clinical trial pipeline at $(date)" > $LOG_FILE
 
 for nb in "${NOTEBOOKS[@]}"; do
     echo "Running $nb ..." >> $LOG_FILE
-    jupyter nbconvert --execute --to notebook "$nb" --output "output/${nb}" --ExecutePreprocessor.timeout=600
-    if [ $? -ne 0 ]; then
-        echo "ERROR: $nb failed to execute." >> $LOG_FILE
+
+    # Run notebook and stop on error using || 
+    jupyter nbconvert --execute --to notebook "$nb" --output "output/${nb}" --ExecutePreprocessor.timeout=600 || {
+        echo "ERROR: $nb failed." >> $LOG_FILE
         echo "Pipeline stopped due to failure in $nb."
         exit 1
-    else
-        echo "$nb completed successfully." >> $LOG_FILE
-    fi
+    }
+
+    echo "$nb completed successfully." >> $LOG_FILE
 done
 
 echo "Pipeline completed successfully at $(date)!" >> $LOG_FILE
@@ -31,5 +32,4 @@ echo "Pipeline completed successfully at $(date)!" >> $LOG_FILE
 # Use either `$?` or `||` operator to check exit codes and stop on failure
 # Add a log entry for each notebook execution or failure
 # jupyter nbconvert --execute --to notebook q4_exploration.ipynb
-echo "Pipeline complete!" >> reports/pipeline_log.txt
 
