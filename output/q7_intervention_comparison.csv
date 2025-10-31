@@ -1,0 +1,27 @@
+intervention_group,mean_cvd_rate,mean_adherence_pct
+  CONTROL  ,0.333,58.706
+  Contrl  ,0.333,61.263
+  Control  ,0.457,61.361
+  TREATMENT A  ,0.368,57.296
+  TREATMENT B  ,0.395,62.171
+  Treatmen A  ,0.381,60.566
+  Treatment  B  ,0.458,59.741
+  Treatment A  ,0.409,61.358
+  Treatment B  ,0.436,58.872
+  TreatmentA  ,0.375,58.528
+  control  ,0.355,63.956
+  treatment a  ,0.545,60.17
+  treatment b  ,0.486,65.703
+CONTROL,0.381,60.623
+Contrl,0.462,59.854
+Control,0.421,61.156
+TREATMENT A,0.485,60.523
+TREATMENT B,0.504,60.361
+Treatmen A,0.449,59.771
+Treatment  B,0.403,60.932
+Treatment A,0.421,61.348
+Treatment B,0.446,61.385
+TreatmentA,0.423,59.296
+control,0.46,60.603
+treatment a,0.457,60.474
+treatment b,0.481,61.12
